@@ -23,10 +23,20 @@ Add a step like this to your workflow:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
 ```
 
+It is possible to omit inputs where the default values is sufficient 
+```yaml
+- name: Commit changes # This is the step name that will be displayed in your runs
+  uses: EndBug/add-and-commit@v2.1.1 # You can change this to use a specific version
+  with: # See more info about inputs below
+    message: "A commit from ${{ github.actor }}"
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+```
+
 ### Inputs:
 
-- `author_name` : the name of the user that will be displayed as the author of the commit
-- `author_email` : the email of the user that will be displayed as the author of the commit
+- `author_name` : the name of the user that will be displayed as the author of the commit, defaults to the author of the head commit
+- `author_email` : the email of the user that will be displayed as the author of the commit, defaults to the author of the head commit
 - `message` : the message for the commit
 - `path` : the path(s) to stage files from
 - `pattern` : the pattern that matches file names
@@ -34,8 +44,10 @@ Add a step like this to your workflow:
 
 ### Environment variables:
 
-The only `env` variable required is the token for the action to run: GitHub generates one automatically, but you need to pass it through `env` to make it available to actions. You can find more about `GITHUB_TOKEN` [here](https://help.github.com/en/articles/virtual-environments-for-github-actions#github_token-secret).  
-With that said, you can just copy the example line and don't worry about it. If you do want to use a different token you can pass that in, but I wouldn't see any possible advantage in doing so.
+The only `env` variable required is the token for the action to run: GitHub generates one automatically, but you need to pass it through `env` to make
+it available to actions. You can find more about `GITHUB_TOKEN` [here](https://help.github.com/en/articles/virtual-environments-for-github-actions#github_token-secret).  
+With that said, you can just copy the example line and don't worry about it. If you do want to use a different token you can pass that in, but I
+wouldn't see any possible advantage in doing so.
 
 ### Deleting files:
 
@@ -86,10 +98,7 @@ jobs:
     - name: Commit changes
       uses: EndBug/add-and-commit@v2.1.1 
       with:
-        author_name: Your Name
-        author_email: mail@example.com
         message: "Your commit message"
-        path: "."
         pattern: "*.js"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -98,3 +107,7 @@ jobs:
 ## License
 
 This action is distributed under the MIT license, check the [license](LICENSE) for more info.
+
+## Caution
+
+This action only works on a github runner which is able to run bash scrips with [node](https://nodejs.org/en/) and [jp](https://stedolan.github.io/jq/) installed

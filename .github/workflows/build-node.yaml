@@ -1,0 +1,22 @@
+name: build node action
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+
+  build-with-ncc:
+    runs-on: ubuntu-16.04
+    name: build actions with ncc
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '13.x'
+      - run: npm i -g @zeit/ncc
+      - name: build node artifact
+        uses: jactor-rises/actions/build-node-artifact@master
+        with:
+          artifact_folder: add-and-commit

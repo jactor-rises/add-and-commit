@@ -3,10 +3,10 @@ description: 'Add & commit files from a path directly from GitHub Actions'
 
 inputs:
   author_name:
-    description: 'The name of the user that will be displayed as the author of the commit, defaults to author name of head commit'
+    description: 'The name of the user that will be displayed as the author of the commit, defaults to author name of the head commit'
     required: false
   author_email:
-    description: 'The email of the user that will be displayed as the author of the commit, defaults to author email of head commit'
+    description: 'The email of the user that will be displayed as the author of the commit, defaults to author email of the head commit'
     required: false
   force:
     description: 'Whether to use the force option on git add, in order to bypass eventual gitignores'
@@ -21,13 +21,9 @@ inputs:
     required: true
     default: '.'
   pattern:
-    description: 'The pattern that mathces file names'
+    description: 'The pattern that matches file names'
     required: false
     default: "*.*"
-    
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
 
 branding: 
   icon: 'git-commit'
