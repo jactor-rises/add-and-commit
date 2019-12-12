@@ -25,6 +25,10 @@ inputs:
     required: false
     default: "*.*"
 
+runs:
+  using: node12
+  main: dist/index.js
+
 branding: 
   icon: 'git-commit'
   color: black
