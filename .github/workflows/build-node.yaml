@@ -21,7 +21,7 @@ jobs:
         with:
           artifact_folder: add-and-commit
       - name: commit build changes
-        uses: jactor-rises/add-and-commit@feature-node
+        uses: jactor-rises/add-and-commit@master
         with:
           message: "Fresh build of node artifact caused by ${{ github.actor }}"
         env:
